@@ -1,0 +1,12 @@
+alert http $HOME_NET any -> $EXTERNAL_NET any (
+    msg:"EICAR Test File Download Attempt"; 
+    flow:established,to_server;
+    http.hostname:"www.eicar.org";
+    http.uri;
+    content:"/download/eicar";
+    classtype:policy-violation;
+    reference:url,www.eicar.org;
+    sid:1000001;
+    rev:1;
+    action:drop;
+)
