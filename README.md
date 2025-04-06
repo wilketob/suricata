@@ -12,11 +12,11 @@ The primary rule set (`FileSpoof.rules`) contains rules for detecting various fi
 * **Disguised Archives:** Detects files with ZIP (`50 4B`) or RAR (`52 61 72 21`) Magic Bytes but have a non-matching file extension.
 * **Invalid Image/PDF Files:** Detects files with extensions like `.png`, `.jpg`, or `.pdf` whose Magic Bytes at the beginning of the file do *not* match the expected signatures (i.e., checks if a file claiming to be a PNG actually starts with the PNG signature).
 
-The rules utilize specific Suricata keywords such as `content` (with `offset` and `depth` for targeted Magic Byte checks), `file.name`, `flowbits` (for linking conditions), and `file.data` (for correct analysis of the file payload), as described in the Bachelor Thesis (Chapters 4.4 and 5.5).
+The rules utilize specific Suricata keywords such as `content` (with `offset` and `depth` for targeted Magic Byte checks), `file.name`, `flowbits` (for linking conditions), and `file.data` (for correct analysis of the file payload),
 
 ## Integration with OPNsense
 
-The rules were primarily developed and tested for use with Suricata within the OPNsense firewall environment. Here’s how you can integrate them (see also Section 4.2.1 of the thesis):
+The rules were primarily developed and tested for use with Suricata within the OPNsense firewall environment. Here’s how you can integrate them:
 
 1.  **Deploy Rule File:** Download the `.rules` file from this repository and place it on a web server accessible by your OPNsense instance (e.g., `http://<your_server>/suricata/FileSpoof.rules`).
 2.  **Create Metadata XML:** Create an XML file on your OPNsense firewall in the directory `/usr/local/opnsense/scripts/suricata/metadata/rules/`. Name the file, for example, `wilketob-filespoof.xml`. Adjust the content according to your setup (especially `location url` and `prefix`):
